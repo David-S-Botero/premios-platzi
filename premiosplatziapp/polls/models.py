@@ -6,13 +6,13 @@ import datetime
 class Question(models.Model):
 
     question_text = models.CharField(max_length=200) 
-    pub_date = models.DateTimeField("Date published", auto_now_add=True)
+    pub_date = models.DateTimeField("Date published")
 
     def __str__(self) -> str:
         return self.question_text
     
     def was_publish_recently(self) -> bool :
-        return  self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        return  timezone.now() >= self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
     
 
